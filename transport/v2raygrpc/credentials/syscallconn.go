@@ -1,3 +1,5 @@
+//go:build !with_anytls_only
+
 /*
  *
  * Copyright 2018 gRPC authors.

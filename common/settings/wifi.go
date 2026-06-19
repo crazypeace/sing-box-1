@@ -1,3 +1,4 @@
+
 package settings
 
 import "github.com/sagernet/sing-box/adapter"

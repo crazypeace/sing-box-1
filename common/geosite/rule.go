@@ -1,3 +1,5 @@
+//go:build !with_anytls_only
+
 package geosite
 
 import "github.com/sagernet/sing-box/option"

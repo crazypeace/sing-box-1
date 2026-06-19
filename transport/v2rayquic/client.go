@@ -1,4 +1,4 @@
-//go:build with_quic
+//go:build with_quic && !with_anytls_only
 
 package v2rayquic
 

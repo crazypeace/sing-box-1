@@ -21,3 +21,7 @@
 CLAUDE.md
 AGENTS.md
 /.claude/
+sing-box-anytls
+sing-box-anytls-*
+*.zip
+!include/**

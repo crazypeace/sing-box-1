@@ -1,4 +1,4 @@
-//go:build !with_grpc
+//go:build !with_grpc && !with_anytls_only
 
 package v2ray
 

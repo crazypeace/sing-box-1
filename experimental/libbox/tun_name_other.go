@@ -1,4 +1,4 @@
-//go:build !(darwin || linux)
+//go:build !(darwin || linux) && !with_anytls_only
 
 package libbox
 

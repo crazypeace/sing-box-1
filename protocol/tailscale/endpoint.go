@@ -1,4 +1,4 @@
-//go:build with_gvisor
+//go:build with_gvisor && !with_anytls_only
 
 package tailscale
 

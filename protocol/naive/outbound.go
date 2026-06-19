@@ -1,4 +1,4 @@
-//go:build with_naive_outbound
+//go:build with_naive_outbound && !with_anytls_only
 
 package naive
 

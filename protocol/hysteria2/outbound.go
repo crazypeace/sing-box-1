@@ -1,3 +1,4 @@
+//go:build !with_anytls_only
 package hysteria2
 
 import (

@@ -1,3 +1,5 @@
+//go:build with_anytls_only
+
 package include
 
 import (
@@ -12,8 +14,6 @@ import (
 	C "github.com/sagernet/sing-box/constant"
 	"github.com/sagernet/sing-box/dns"
 	"github.com/sagernet/sing-box/dns/transport"
-	"github.com/sagernet/sing-box/dns/transport/fakeip"
-	"github.com/sagernet/sing-box/dns/transport/hosts"
 	"github.com/sagernet/sing-box/dns/transport/local"
 	"github.com/sagernet/sing-box/log"
 	"github.com/sagernet/sing-box/option"
@@ -22,20 +22,9 @@ import (
 	"github.com/sagernet/sing-box/protocol/direct"
 	"github.com/sagernet/sing-box/protocol/group"
 	"github.com/sagernet/sing-box/protocol/http"
-	"github.com/sagernet/sing-box/protocol/mixed"
-	"github.com/sagernet/sing-box/protocol/naive"
 	"github.com/sagernet/sing-box/protocol/redirect"
-	"github.com/sagernet/sing-box/protocol/shadowsocks"
-	"github.com/sagernet/sing-box/protocol/shadowtls"
 	"github.com/sagernet/sing-box/protocol/socks"
-	"github.com/sagernet/sing-box/protocol/ssh"
-	"github.com/sagernet/sing-box/protocol/tor"
-	"github.com/sagernet/sing-box/protocol/trojan"
 	"github.com/sagernet/sing-box/protocol/tun"
-	"github.com/sagernet/sing-box/protocol/vless"
-	"github.com/sagernet/sing-box/protocol/vmess"
-	"github.com/sagernet/sing-box/service/resolved"
-	"github.com/sagernet/sing-box/service/ssmapi"
 	E "github.com/sagernet/sing/common/exceptions"
 )
 
@@ -53,17 +42,9 @@ func InboundRegistry() *inbound.Registry {
 
 	socks.RegisterInbound(registry)
 	http.RegisterInbound(registry)
-	mixed.RegisterInbound(registry)
 
-	shadowsocks.RegisterInbound(registry)
-	vmess.RegisterInbound(registry)
-	trojan.RegisterInbound(registry)
-	naive.RegisterInbound(registry)
-	shadowtls.RegisterInbound(registry)
-	vless.RegisterInbound(registry)
 	anytls.RegisterInbound(registry)
 
-	registerQUICInbounds(registry)
 	registerStubForRemovedInbounds(registry)
 
 	return registry
@@ -79,19 +60,8 @@ func OutboundRegistry() *outbound.Registry {
 	group.RegisterSelector(registry)
 	group.RegisterURLTest(registry)
 
-	socks.RegisterOutbound(registry)
-	http.RegisterOutbound(registry)
-	shadowsocks.RegisterOutbound(registry)
-	vmess.RegisterOutbound(registry)
-	trojan.RegisterOutbound(registry)
-	registerNaiveOutbound(registry)
-	tor.RegisterOutbound(registry)
-	ssh.RegisterOutbound(registry)
-	shadowtls.RegisterOutbound(registry)
-	vless.RegisterOutbound(registry)
 	anytls.RegisterOutbound(registry)
 
-	registerQUICOutbounds(registry)
 	registerStubForRemovedOutbounds(registry)
 
 	return registry
@@ -99,9 +69,6 @@ func OutboundRegistry() *outbound.Registry {
 
 func EndpointRegistry() *endpoint.Registry {
 	registry := endpoint.NewRegistry()
-
-	registerWireGuardEndpoint(registry)
-	registerTailscaleEndpoint(registry)
 
 	return registry
 }
@@ -113,28 +80,13 @@ func DNSTransportRegistry() *dns.TransportRegistry {
 	transport.RegisterUDP(registry)
 	transport.RegisterTLS(registry)
 	transport.RegisterHTTPS(registry)
-	hosts.RegisterTransport(registry)
 	local.RegisterTransport(registry)
-	fakeip.RegisterTransport(registry)
-	resolved.RegisterTransport(registry)
-
-	registerQUICTransports(registry)
-	registerDHCPTransport(registry)
-	registerTailscaleTransport(registry)
 
 	return registry
 }
 
 func ServiceRegistry() *service.Registry {
 	registry := service.NewRegistry()
-
-	resolved.RegisterService(registry)
-	ssmapi.RegisterService(registry)
-
-	registerDERPService(registry)
-	registerCCMService(registry)
-	registerOCMService(registry)
-	registerOOMKillerService(registry)
 
 	return registry
 }

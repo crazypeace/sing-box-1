@@ -1,3 +1,5 @@
+//go:build !with_anytls_only
+
 package libbox
 
 import "golang.org/x/sys/unix"

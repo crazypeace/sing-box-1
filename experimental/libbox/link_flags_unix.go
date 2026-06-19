@@ -1,4 +1,4 @@
-//go:build unix
+//go:build unix && !with_anytls_only
 
 package libbox
 

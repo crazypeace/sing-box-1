@@ -1,4 +1,4 @@
-//go:build !darwin
+//go:build !darwin && !with_anytls_only
 
 package ocm
 

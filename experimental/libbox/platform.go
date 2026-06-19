@@ -1,3 +1,5 @@
+//go:build !with_anytls_only
+
 package libbox
 
 import C "github.com/sagernet/sing-box/constant"

@@ -1,3 +1,5 @@
+//go:build !with_anytls_only
+
 package oomkiller
 
 import (

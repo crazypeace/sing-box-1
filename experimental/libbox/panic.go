@@ -1,3 +1,5 @@
+//go:build !with_anytls_only
+
 package libbox
 
 // https://github.com/golang/go/issues/46893

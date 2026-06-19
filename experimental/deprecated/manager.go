@@ -1,3 +1,4 @@
+
 package deprecated
 
 import (
